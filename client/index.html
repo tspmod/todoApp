@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+<link rel="stylesheet" href="style.css">
+
+  </head>
+  <body onload="getData()">
+<div class="container">
+<h1>To Do List</h1>
+
+    <!-- <form action="/task/add" method="post">
+      <input type="text" id="todoInput" name="name" placeholder="Insert your task here...">
+      <input type="submit" value="submit">
+    </form> -->
+
+    <form>
+      <input type="text" id="todoInput" name="name" placeholder="Insert your task here...">
+      <button onclick="addData();">Add</button>
+      <button onclick="deleteData();">Delete All</button>
+    </form>
+
+    <p id="demo">
+
+    </p>
+
+<script>
+function getData() {
+
+
+fetch('http://localhost:3000/task/display')
+  .then(res => res.json())
+  .then(res => res.map(user => user))
+  .then(userNames => document.getElementById("demo").innerHTML =
+  userNames.map(task=>`<h4>${task.name}
+  <input onclick="taskDone('${task._id}', '${task.check}')" type='checkbox' ${task.check}>
+  <span class="deleteTask" onclick='deleteData("${task._id}"); getData()'>X</span></h4>`).join(''));
+}
+
+function addData() {
+  const myPost = {};
+  myPost.name = document.getElementById('todoInput').value;
+
+const options = {
+  method: 'POST',
+  body: JSON.stringify(myPost),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+};
+fetch('http://localhost:3000/task/add', options)
+  .then(res => res.json())
+  .then(res => console.log(res));
+
+}
+
+function taskDone(id, check) {
+  if(check == 'unchecked') {
+    updateData(id, 'checked');
+
+  }
+  else {
+    updateData(id, 'unchecked')
+  }
+}
+
+
+function updateData(id, newValue) {
+  const myPost = {};
+  myPost._id = id;
+  myPost.check = newValue;
+
+const options = {
+  method: 'PUT',
+  body: JSON.stringify(myPost),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+};
+
+
+fetch('http://localhost:3000/task/update', options)
+  .then(res => res.json())
+  .then(res => console.log(res));
+
+}
+
+function deleteData(id) {
+  const myPost = {};
+  myPost._id = id;
+
+const options = {
+  method: 'DELETE',
+  body: JSON.stringify(myPost),
+  headers: {
+    'Content-Type': 'application/json'
+  }
+};
+
+fetch('http://localhost:3000/task/delete', options)
+  .then(res => res.json())
+  .then(res => console.log(res));
+
+}
+</script>
+</div>
+  </body>
+</html>

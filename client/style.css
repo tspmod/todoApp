@@ -1,0 +1,72 @@
+<style>
+* {
+  margin: 10;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background: #298A8C;
+  font-size: 1rem;
+  font-family: 'Helvetica', sans-serif;
+  height: 80%;
+}
+
+/* .container {
+    background: #298A8C;
+    font-size: 1rem;
+    font-family: 'Helvetica', sans-serif;
+    height: 80%;
+    margin: 0 auto;
+} */
+
+.container {
+  width: 500px;
+  height: 500px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 40px;
+  border-radius: 25px;
+  margin: 0 auto;
+  color: white;
+  margin-top: 50px;
+}
+
+h1 {
+  font-size: 50px;
+  text-align: center;
+  color: white;
+}
+
+form {
+  display: flex;
+}
+
+form input {
+  padding: 10px;
+  font-size: 20px;
+  float: left;
+}
+
+form input[type='text'] {
+  flex-grow: 4;
+  border: 0;
+  border-bottom: 1px solid lightgray;
+  outline: 0;
+  text-align: center;
+}
+
+button {
+  float: right;
+  width: 10%;
+}
+
+.deleteTask {
+  color: red;
+  margin-left: 5px;
+}
+
+.deleteTask:hover {
+  background: grey;
+}
+
+</style>
